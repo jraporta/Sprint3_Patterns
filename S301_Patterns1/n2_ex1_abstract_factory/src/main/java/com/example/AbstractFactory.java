@@ -1,6 +1,7 @@
 package com.example;
 
 import exeptions.NonExistantCountryException;
+import exeptions.TelephoneFormatException;
 
 public interface AbstractFactory {
 	
@@ -14,6 +15,6 @@ public interface AbstractFactory {
 
 	public Address createAddress();
 	
-	public Telephone createTelephone(String telephone);
+	public Telephone createTelephone(String telephone) throws TelephoneFormatException;
 	
 }

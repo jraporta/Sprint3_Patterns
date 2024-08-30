@@ -1,13 +1,14 @@
 package com.example;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import exeptions.NonExistantCountryException;
 
 public enum Countries {
 	SPAIN("com.example.ESFactory"),
-	USA("USAFactory"),
-	UK("UKFactory");
+	USA("com.example.USAFactory"),
+	UK("com.example.UKFactory");
 	
 	private String factoryClass;
 	private AbstractFactory factory;
@@ -24,15 +25,16 @@ public enum Countries {
 			try {
 				@SuppressWarnings("unchecked")
 				Class<AbstractFactory> factoryClass = (Class<AbstractFactory>) Class.forName(this.factoryClass);
-				this.factory = (AbstractFactory) (factoryClass.getDeclaredMethod("getInstance").invoke(null));
+				Constructor<AbstractFactory> constructor = factoryClass.getConstructor();
+				this.factory = constructor.newInstance();
 				return this.factory ;
 			} catch (IllegalArgumentException e) {
 				throw new NonExistantCountryException();
 			} catch (ClassNotFoundException | NoSuchMethodException e) {
 				throw new NonExistantCountryException("country is not fully implemented");
-			} catch (InvocationTargetException | IllegalAccessException | SecurityException  e) {
+			} catch (InvocationTargetException | IllegalAccessException | InstantiationException  e) {
 				throw new RuntimeException(e.getMessage());
-			} 
+			}
 		}
 	}
 

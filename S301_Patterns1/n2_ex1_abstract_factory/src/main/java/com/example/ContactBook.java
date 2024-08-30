@@ -39,4 +39,12 @@ public class ContactBook {
 		this.telephoneBook.put(name, telephone);
 	}
 
+	@Override
+	public String toString() {
+		return String.format("ContactBook containing %d addresses and %d telephones.",
+				this.addressBook.size(), this.telephoneBook.size());
+	}
+	
+	
+
 }

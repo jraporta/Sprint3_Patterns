@@ -1,6 +1,7 @@
 package com.example;
 
 import exeptions.NonExistantCountryException;
+import exeptions.TelephoneFormatException;
 import util.Entrada;
 
 public class App {
@@ -13,13 +14,13 @@ public class App {
     	do {
     		switch(menu()) {
     		   	case 1:
-    		   		//to do
+    		   		setAddress();
     		   		break;
     		   	case 2:
     		   		setTelephone();
     		   		break;
     		   	case 3:
-    		   		//to do
+    		   		retrieveAddress();
     		   		break;
     		   	case 4:
     		   		retrieveTelephone();
@@ -47,6 +48,21 @@ public class App {
     			+ "\n0. Quit.\n");
     }
     
+    	private static void setAddress() {
+		String name;
+    	Address address;
+    	AbstractFactory factory;
+    	
+    	name = Entrada.llegirString("Write the contact name: ");
+		try {
+			factory = AbstractFactory.getInstance(Entrada.llegirString("Write the country: "));
+			address = factory.createAddress();
+			contactBook.setAddress(name, address);
+		} catch (NonExistantCountryException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+    
     public static void setTelephone() {
     	String name;
     	Telephone telephone;
@@ -56,7 +72,12 @@ public class App {
    		try {
 			factory = AbstractFactory.getInstance(Entrada.llegirString("Write the country: "));
 		   	do {
-		   		telephone = factory.createTelephone(Entrada.llegirString("Write the telephone number: "));
+		   		try {
+					telephone = factory.createTelephone(Entrada.llegirString("Write the telephone number: "));
+				} catch (TelephoneFormatException e) {
+					System.out.println(e.getMessage());
+					telephone = null;
+				}
 		   	} while (telephone == null);
 		   	contactBook.setTelephone(name, telephone);
    		} catch (NonExistantCountryException e) {
@@ -64,12 +85,23 @@ public class App {
 		}
     }
     
+    private static void retrieveAddress() {
+    	String name;
+    	Address address;
+    	
+    	name = Entrada.llegirString("Write the contact name: ");
+   		address = contactBook.getAddress(name);
+   		System.out.print(address != null ? String.format("%s -> %s%n", name, address) :
+   			String.format("No entry found for: %s.%n", name));
+	}
+    
     public static void retrieveTelephone() {
     	String name;
     	Telephone telephone;
     	
     	name = Entrada.llegirString("Write the contact name: ");
    		telephone = contactBook.getTelephone(name);
-   		System.out.printf("%s -> %s%n", name, telephone);
+   		System.out.print(telephone != null ? String.format("%s -> %s%n", name, telephone) :
+   			String.format("No entry found for: %s.%n", name));
     }
 }
