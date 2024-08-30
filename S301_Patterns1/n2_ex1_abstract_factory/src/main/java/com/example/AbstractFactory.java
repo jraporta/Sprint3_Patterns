@@ -1,7 +1,9 @@
 package com.example;
 
+import address.Address;
 import exeptions.NonExistantCountryException;
 import exeptions.TelephoneFormatException;
+import telephone.Telephone;
 
 public interface AbstractFactory {
 	

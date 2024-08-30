@@ -1,7 +1,9 @@
 package com.example;
 
+import address.Address;
 import exeptions.NonExistantCountryException;
 import exeptions.TelephoneFormatException;
+import telephone.Telephone;
 import util.Entrada;
 
 public class App {
@@ -91,7 +93,7 @@ public class App {
     	
     	name = Entrada.llegirString("Write the contact name: ");
    		address = contactBook.getAddress(name);
-   		System.out.print(address != null ? String.format("%s -> %s%n", name, address) :
+   		System.out.print(address != null ? String.format("%s -> %n%s%n", name, address.getAddress()) :
    			String.format("No entry found for: %s.%n", name));
 	}
     

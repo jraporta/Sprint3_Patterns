@@ -1,10 +1,10 @@
-package com.example;
+package telephone;
 
 import exeptions.TelephoneFormatException;
 
 public class ESTelephone extends Telephone{
 	
-	private static final String REGEX = "^\\+34[6-9][0-9]{8}+$";
+	private static final String REGEX = "^\\+34[6-9][0-9]{8}$";
 	private static final String COUNTRY = "Spain";
 	private static final String EXPLANATION = 
 			"Spanish telephone should be +34 followed by a 9-digit number starting with 9,8, 7 or 6.";

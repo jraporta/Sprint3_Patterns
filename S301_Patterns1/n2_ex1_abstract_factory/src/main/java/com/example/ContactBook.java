@@ -3,6 +3,9 @@ package com.example;
 import java.util.HashMap;
 import java.util.Map;
 
+import address.Address;
+import telephone.Telephone;
+
 public class ContactBook {
 	
 	private static ContactBook instance = null;

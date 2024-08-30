@@ -6,9 +6,9 @@ import java.lang.reflect.InvocationTargetException;
 import exeptions.NonExistantCountryException;
 
 public enum Countries {
-	SPAIN("com.example.ESFactory"),
-	USA("com.example.USAFactory"),
-	UK("com.example.UKFactory");
+	SPAIN("factory.ESFactory"),
+	USA("factory.USAFactory"),
+	UK("factory.UKFactory");
 	
 	private String factoryClass;
 	private AbstractFactory factory;
