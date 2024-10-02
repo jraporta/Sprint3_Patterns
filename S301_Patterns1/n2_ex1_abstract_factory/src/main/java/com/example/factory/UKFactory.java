@@ -1,12 +1,12 @@
-package factory;
+package com.example.factory;
 
 import com.example.AbstractFactory;
 
-import address.Address;
-import address.UKAddress;
-import exeptions.TelephoneFormatException;
-import telephone.Telephone;
-import telephone.UKTelephone;
+import com.example.address.Address;
+import com.example.address.UKAddress;
+import com.example.exceptions.TelephoneFormatException;
+import com.example.telephone.Telephone;
+import com.example.telephone.UKTelephone;
 
 public class UKFactory implements AbstractFactory{
 

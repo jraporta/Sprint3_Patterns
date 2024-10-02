@@ -3,12 +3,12 @@ package com.example;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-import exeptions.NonExistantCountryException;
+import com.example.exceptions.NonExistantCountryException;
 
 public enum Countries {
-	SPAIN("factory.ESFactory"),
-	USA("factory.USAFactory"),
-	UK("factory.UKFactory");
+	SPAIN("com.example.factory.ESFactory"),
+	USA("com.example.factory.USAFactory"),
+	UK("com.example.factory.UKFactory");
 	
 	private String factoryClass;
 	private AbstractFactory factory;

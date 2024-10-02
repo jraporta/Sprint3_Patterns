@@ -1,19 +1,21 @@
-package address;
+package com.example.address;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-public class ESAddress extends Address{
+public class USAAddress extends Address{
 	
 	enum field{
-		STREET (true, null),
+		//natural number
 		NUMBER (true, "^\\d+$"),
-		FLAT (false, null),
-		APPARTMENT (false, null),
-		POSTAL_CODE (true, "^\\d{5}$"),
+		STREET (true, null),
+		APARTMENT(false, null),
 		CITY (true, null),
-		PROVINCE (true, null);
+		//Two non-digit characters
+		STATE (true, "^\\D{2}$"),
+		//5-digit number optionally followed by a dash plus a 4-digit number
+		POSTAL_CODE (true, "^\\d{5}(-\\d{4})?$");
 
 		private boolean isMandatory;
 		private String regex;
@@ -24,10 +26,10 @@ public class ESAddress extends Address{
 		}
 	}
 	
-	private static final String COUNTRY = "Spain";
+	private static final String COUNTRY = "USA";
 	private LinkedHashMap<String, String> address;
 	
-	public ESAddress() {
+	public USAAddress() {
 		this.address = super.askForAddress();
 	}
 
@@ -36,7 +38,7 @@ public class ESAddress extends Address{
 	public String getField(String field) {
 		switch (field.toUpperCase()) {
 		case "COUNTRY":
-			return ESAddress.COUNTRY;
+			return USAAddress.COUNTRY;
 		default:
 			return this.address.get(field) == null ? "" : this.address.get(field);
 		}
@@ -54,21 +56,20 @@ public class ESAddress extends Address{
 
 	@Override
 	public boolean fieldIsMandatory(String field) {
-		return ESAddress.field.valueOf(field).isMandatory;
+		return USAAddress.field.valueOf(field).isMandatory;
 	}
 
 	@Override
 	public String getFieldRegex(String field) {
-		return ESAddress.field.valueOf(field).regex;
+		return USAAddress.field.valueOf(field).regex;
 	}
 
 	@Override
 	public String getAddress() {
-		return String.format("%s %s, %s %s%n%s - %s%n%s",
-				this.getField("STREET"), this.getField("NUMBER"),
-				this.getField("FLAT"), this.getField("APPARTMENT"),
-				this.getField("POSTAL_CODE"), this.getField("CITY"),
-				ESAddress.COUNTRY
+		return String.format("%s %s, %s%n%s, %s %s%n%s",
+				this.getField("NUMBER"), this.getField("STREET"), this.getField("APARTMENT"),
+				this.getField("CITY"), this.getField("STATE"), this.getField("POSTAL_CODE"),
+				USAAddress.COUNTRY
 				);
 	}
 	

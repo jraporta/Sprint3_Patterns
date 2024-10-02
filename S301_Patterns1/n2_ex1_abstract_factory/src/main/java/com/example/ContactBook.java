@@ -3,8 +3,8 @@ package com.example;
 import java.util.HashMap;
 import java.util.Map;
 
-import address.Address;
-import telephone.Telephone;
+import com.example.address.Address;
+import com.example.telephone.Telephone;
 
 public class ContactBook {
 	

@@ -1,18 +1,21 @@
-package address;
+package com.example.address;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-public class UKAddress extends Address{
+public class ESAddress extends Address{
 	
 	enum field{
-		NUMBER (true, "^\\d+$"),
 		STREET (true, null),
-		APPARTMENT (false, null),
-		NEIGHBOURHOOD_OR_DISTRICT (false, null),
+		//natural number
+		NUMBER (true, "^\\d+$"),
+		FLAT (false, null),
+		APARTMENT(false, null),
+		//5 digit number
+		POSTAL_CODE (true, "^\\d{5}$"),
 		CITY (true, null),
-		POSTAL_CODE (true, "^.{5,7}$");
+		PROVINCE (true, null);
 
 		private boolean isMandatory;
 		private String regex;
@@ -23,10 +26,10 @@ public class UKAddress extends Address{
 		}
 	}
 	
-	private static final String COUNTRY = "United Kingdom";
+	private static final String COUNTRY = "Spain";
 	private LinkedHashMap<String, String> address;
 	
-	public UKAddress() {
+	public ESAddress() {
 		this.address = super.askForAddress();
 	}
 
@@ -35,7 +38,7 @@ public class UKAddress extends Address{
 	public String getField(String field) {
 		switch (field.toUpperCase()) {
 		case "COUNTRY":
-			return UKAddress.COUNTRY;
+			return ESAddress.COUNTRY;
 		default:
 			return this.address.get(field) == null ? "" : this.address.get(field);
 		}
@@ -53,21 +56,21 @@ public class UKAddress extends Address{
 
 	@Override
 	public boolean fieldIsMandatory(String field) {
-		return UKAddress.field.valueOf(field).isMandatory;
+		return ESAddress.field.valueOf(field).isMandatory;
 	}
 
 	@Override
 	public String getFieldRegex(String field) {
-		return UKAddress.field.valueOf(field).regex;
+		return ESAddress.field.valueOf(field).regex;
 	}
 
 	@Override
 	public String getAddress() {
-		return String.format("%s %s, %s%n%s%s%n%s%n%s",
-				this.getField("NUMBER"), this.getField("STREET"), this.getField("APPARTMENT"),
-				this.getField("NEIGHBOURHOOD_OR_DISTRICT") == "" ? "" : this.getField("NEIGHBOURHOOD_OR_DISTRICT") + "\n",
-				this.getField("CITY"), this.getField("POSTAL_CODE"),
-				UKAddress.COUNTRY
+		return String.format("%s %s, %s %s%n%s - %s%n%s",
+				this.getField("STREET"), this.getField("NUMBER"),
+				this.getField("FLAT"), this.getField("APARTMENT"),
+				this.getField("POSTAL_CODE"), this.getField("CITY"),
+				ESAddress.COUNTRY
 				);
 	}
 	

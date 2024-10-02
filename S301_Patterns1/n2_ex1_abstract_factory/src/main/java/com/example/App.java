@@ -1,10 +1,10 @@
 package com.example;
 
-import address.Address;
-import exeptions.NonExistantCountryException;
-import exeptions.TelephoneFormatException;
-import telephone.Telephone;
-import util.Entrada;
+import com.example.address.Address;
+import com.example.exceptions.NonExistantCountryException;
+import com.example.exceptions.TelephoneFormatException;
+import com.example.telephone.Telephone;
+import com.example.util.Entrada;
 
 public class App {
 	
@@ -42,10 +42,10 @@ public class App {
     
     public static int menu() {
     	return Entrada.llegirInt("Select an option:"
-    			+ "\n1. Add an address."
-    			+ "\n2. Add a telephone number."
-    			+ "\n3. Retrieve an address."
-    			+ "\n4. Retrive a telephone number."
+    			+ "\n1. Add an com.example.address."
+    			+ "\n2. Add a com.example.telephone number."
+    			+ "\n3. Retrieve an com.example.address."
+    			+ "\n4. Retrive a com.example.telephone number."
     			+ "\n5. About."
     			+ "\n0. Quit.\n");
     }
@@ -75,7 +75,7 @@ public class App {
 			factory = AbstractFactory.getInstance(Entrada.llegirString("Write the country: "));
 		   	do {
 		   		try {
-					telephone = factory.createTelephone(Entrada.llegirString("Write the telephone number: "));
+					telephone = factory.createTelephone(Entrada.llegirString("Write the com.example.telephone number: "));
 				} catch (TelephoneFormatException e) {
 					System.out.println(e.getMessage());
 					telephone = null;

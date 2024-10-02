@@ -1,18 +1,20 @@
-package address;
+package com.example.address;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-public class USAAddress extends Address{
+public class UKAddress extends Address{
 	
 	enum field{
+		//natural number
 		NUMBER (true, "^\\d+$"),
 		STREET (true, null),
-		APPARTMENT (false, null),
+		APARTMENT(false, null),
+		NEIGHBOURHOOD_OR_DISTRICT (false, null),
 		CITY (true, null),
-		STATE (true, "^\\D{2}$"),
-		POSTAL_CODE (true, "^\\d{5}(-\\d{4})?$");
+		//5 to 7 character long string
+		POSTAL_CODE (true, "^.{5,7}$");
 
 		private boolean isMandatory;
 		private String regex;
@@ -23,10 +25,10 @@ public class USAAddress extends Address{
 		}
 	}
 	
-	private static final String COUNTRY = "USA";
+	private static final String COUNTRY = "United Kingdom";
 	private LinkedHashMap<String, String> address;
 	
-	public USAAddress() {
+	public UKAddress() {
 		this.address = super.askForAddress();
 	}
 
@@ -35,7 +37,7 @@ public class USAAddress extends Address{
 	public String getField(String field) {
 		switch (field.toUpperCase()) {
 		case "COUNTRY":
-			return USAAddress.COUNTRY;
+			return UKAddress.COUNTRY;
 		default:
 			return this.address.get(field) == null ? "" : this.address.get(field);
 		}
@@ -53,20 +55,21 @@ public class USAAddress extends Address{
 
 	@Override
 	public boolean fieldIsMandatory(String field) {
-		return USAAddress.field.valueOf(field).isMandatory;
+		return UKAddress.field.valueOf(field).isMandatory;
 	}
 
 	@Override
 	public String getFieldRegex(String field) {
-		return USAAddress.field.valueOf(field).regex;
+		return UKAddress.field.valueOf(field).regex;
 	}
 
 	@Override
 	public String getAddress() {
-		return String.format("%s %s, %s%n%s, %s %s%n%s",
-				this.getField("NUMBER"), this.getField("STREET"), this.getField("APPARTMENT"),
-				this.getField("CITY"), this.getField("STATE"), this.getField("POSTAL_CODE"),
-				USAAddress.COUNTRY
+		return String.format("%s %s, %s%n%s%s%n%s%n%s",
+				this.getField("NUMBER"), this.getField("STREET"), this.getField("APARTMENT"),
+				this.getField("NEIGHBOURHOOD_OR_DISTRICT") == "" ? "" : this.getField("NEIGHBOURHOOD_OR_DISTRICT") + "\n",
+				this.getField("CITY"), this.getField("POSTAL_CODE"),
+				UKAddress.COUNTRY
 				);
 	}
 	

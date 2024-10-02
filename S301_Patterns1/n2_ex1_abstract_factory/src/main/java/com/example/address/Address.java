@@ -1,10 +1,10 @@
-package address;
+package com.example.address;
 
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import util.Entrada;
+import com.example.util.Entrada;
 
 public abstract class Address {
 	

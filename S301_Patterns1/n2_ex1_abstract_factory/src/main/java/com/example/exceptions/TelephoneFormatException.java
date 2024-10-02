@@ -1,4 +1,4 @@
-package exeptions;
+package com.example.exceptions;
 
 public class TelephoneFormatException extends Exception {
 	
