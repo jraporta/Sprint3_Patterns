@@ -24,7 +24,7 @@ public class USAFactory implements AbstractFactory {
 
 	@Override
 	public Telephone createTelephone(String telephone) throws TelephoneFormatException {
-		return new USATelephone().initialize(telephone);
+		return new USATelephone(telephone);
 	}
 	
 }

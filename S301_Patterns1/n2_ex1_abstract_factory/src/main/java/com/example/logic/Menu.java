@@ -122,7 +122,7 @@ public class Menu {
 
         name = Entrada.llegirString("Write the contact name: ");
         telephone = contactBook.getTelephone(name);
-        System.out.print(telephone != null ? String.format("%s -> %s%n", name, telephone) :
+        System.out.print(telephone != null ? String.format("%s -> %s%n", name, telephone.getNumber()) :
                 String.format("No entry found for: %s.%n", name));
     }
 

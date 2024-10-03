@@ -25,7 +25,7 @@ public class ESFactory implements AbstractFactory {
 
 	@Override
 	public Telephone createTelephone(String telephone) throws TelephoneFormatException {
-		return new ESTelephone().initialize(telephone);
+		return new ESTelephone(telephone);
 	}
 
 }

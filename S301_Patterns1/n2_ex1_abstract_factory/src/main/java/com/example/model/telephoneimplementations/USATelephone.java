@@ -8,25 +8,16 @@ public class USATelephone implements Telephone {
 
 	private static final String COUNTRY = "USA";
 
-	private String number;
+	private final String number;
 
-	@Override
-	public Telephone initialize(String number) throws TelephoneFormatException {
-		if (this.number != null){
-			throw new TelephoneAlreadyInitializedException();
-		}
+	public USATelephone (String number) throws TelephoneFormatException {
 		this.number = number;
-		return new USATelephoneValidator().validate(this);
+		new USATelephoneValidator().validate(this);
 	}
 
 	@Override
 	public String getNumber() {
 		return this.number;
-	}
-
-	@Override
-	public String getCountry() {
-		return USATelephone.COUNTRY;
 	}
 
 }
