@@ -1,6 +1,5 @@
 package com.example.logic;
 
-import com.example.model.Address;
 import com.example.model.AddressValidator;
 import com.example.util.Entrada;
 
@@ -8,12 +7,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class AddressCollectorMenu {
+public class AddressCollectorDialog {
 
-    public static LinkedHashMap<String, String> askForAddress(Address address) {
+    public static LinkedHashMap<String, String> askForAddress(AddressValidator validator) {
         LinkedHashMap<String, String> addressMap = new LinkedHashMap<>();
 
-        AddressValidator validator = address.getAddressValidator();
         List<String> addressFields = validator.getAddressFields();
 
         for (String field: addressFields) {

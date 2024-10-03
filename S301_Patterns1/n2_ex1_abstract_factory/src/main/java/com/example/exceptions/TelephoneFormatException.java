@@ -1,11 +1,9 @@
 package com.example.exceptions;
 
 public class TelephoneFormatException extends Exception {
-	
-	private static final long serialVersionUID = 1L;
 
 	public TelephoneFormatException(String message) {
-		super("TelephoneFormatException: " + message);
+		super(message);
 	}
 	
 }

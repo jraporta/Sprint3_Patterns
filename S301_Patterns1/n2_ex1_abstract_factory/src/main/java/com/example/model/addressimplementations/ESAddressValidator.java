@@ -11,7 +11,7 @@ public class ESAddressValidator implements AddressValidator {
         STREET(true, null, null),
         //natural number
         NUMBER(true, "^\\d+$", "must be a natural number"),
-        FLAT(false, null, null),
+        FLOOR(false, null, null),
         APARTMENT(false, null, null),
         //5 digit number
         POSTAL_CODE(true, "^\\d{5}$", "must be a 5-digit number"),

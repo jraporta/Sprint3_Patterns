@@ -1,16 +1,10 @@
 package com.example.model;
 
-import java.util.LinkedHashMap;
-
 public interface Address {
+	
+	String getField(String field);
 
-	Address initialize(LinkedHashMap<String, String> address);
-	
-	public String getField(String field);
-	
-	public AddressValidator getAddressValidator();
-	
-	public String getAddress();
+	String getAddress();
 
 }
 

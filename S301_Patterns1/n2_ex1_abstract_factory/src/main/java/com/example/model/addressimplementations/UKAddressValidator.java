@@ -8,9 +8,10 @@ import java.util.List;
 public class UKAddressValidator implements AddressValidator {
 
     enum Field{
+
+        STREET (true, null, null),
         //natural number
         NUMBER (true, "^\\d+$", "must be a natural number"),
-        STREET (true, null, null),
         APARTMENT(false, null, null),
         NEIGHBOURHOOD_OR_DISTRICT (false, null, null),
         CITY (true, null, null),

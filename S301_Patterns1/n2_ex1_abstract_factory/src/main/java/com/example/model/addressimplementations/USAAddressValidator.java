@@ -8,16 +8,16 @@ import java.util.List;
 public class USAAddressValidator implements AddressValidator {
 
     enum Field{
+        STREET (true, null, null),
         //natural number
         NUMBER (true, "^\\d+$", "must be a natural number"),
-        STREET (true, null, null),
         APARTMENT(false, null, null),
         CITY (true, null, null),
         //Two non-digit characters
         STATE (true, "^\\D{2}$", "must be 2 non-digit character long chain"),
         //5-digit number optionally followed by a dash plus a 4-digit number
         POSTAL_CODE (true, "^\\d{5}(-\\d{4})?$",
-                "must be a 5-digit number followed optionally by a 4 digit number");
+                "must be a 5-digit number followed optionally by a dash and a 4 digit number");
 
         private final boolean isMandatory;
         private final String regex;

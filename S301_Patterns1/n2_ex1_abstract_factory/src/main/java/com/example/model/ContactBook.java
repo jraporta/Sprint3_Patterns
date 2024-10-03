@@ -1,9 +1,10 @@
 package com.example.model;
 
+import com.example.exceptions.AddressBookDuplicateKeyException;
+import com.example.exceptions.TelephoneBookDuplicateKeyException;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import com.example.model.addressimplementations.Address;
 
 public class ContactBook {
 	
@@ -39,6 +40,18 @@ public class ContactBook {
 
 	public void setTelephone(String name, Telephone telephone) {
 		this.telephoneBook.put(name, telephone);
+	}
+
+	public void addressBookCheckNameIsAvailable(String name) throws AddressBookDuplicateKeyException {
+		if (this.addressBook.containsKey(name)){
+			throw new AddressBookDuplicateKeyException(String.format("There is already an entry for %s.", name));
+		}
+	}
+
+	public void telephoneBookCheckNameIsAvailable(String name) throws TelephoneBookDuplicateKeyException {
+		if (this.telephoneBook.containsKey(name)){
+			throw new TelephoneBookDuplicateKeyException(String.format("There is already an entry for %s.", name));
+		}
 	}
 
 	@Override

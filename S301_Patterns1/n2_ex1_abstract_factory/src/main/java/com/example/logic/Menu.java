@@ -1,12 +1,16 @@
 package com.example.logic;
 
+import com.example.exceptions.AddressBookDuplicateKeyException;
+import com.example.exceptions.TelephoneBookDuplicateKeyException;
 import com.example.factory.AbstractFactory;
 import com.example.model.ContactBook;
-import com.example.model.addressimplementations.Address;
-import com.example.exceptions.NonExistantCountryException;
+import com.example.model.Address;
+import com.example.exceptions.CountryNotImplementedException;
 import com.example.exceptions.TelephoneFormatException;
 import com.example.model.Telephone;
 import com.example.util.Entrada;
+import static com.example.logic.AddressCollectorDialog.askForAddress;
+import com.example.factory.Countries;
 
 public class Menu {
 
@@ -60,12 +64,17 @@ public class Menu {
         Address address;
         AbstractFactory factory;
 
-        name = Entrada.llegirString("Write the contact name: ");
+
         try {
             factory = AbstractFactory.getInstance(Entrada.llegirString("Write the country: "));
-            address = factory.createAddress();
+            name = Entrada.llegirString("Write the contact name: ");
+            contactBook.addressBookCheckNameIsAvailable(name);
+            address = factory.createAddress(askForAddress(factory.createAddressValidator()));
             contactBook.setAddress(name, address);
-        } catch (NonExistantCountryException e) {
+        } catch (CountryNotImplementedException e) {
+            System.out.printf("The trial version includes %s. Go to the appStore now and buy the full version!%n",
+                    Countries.getList());
+        } catch (AddressBookDuplicateKeyException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -75,19 +84,24 @@ public class Menu {
         Telephone telephone;
         AbstractFactory factory;
 
-        name = Entrada.llegirString("Write the contact name: ");
         try {
             factory = AbstractFactory.getInstance(Entrada.llegirString("Write the country: "));
+            name = Entrada.llegirString("Write the contact name: ");
+            contactBook.telephoneBookCheckNameIsAvailable(name);
             do {
                 try {
-                    telephone = factory.createTelephone(Entrada.llegirString("Write the com.example.model.telephone number: "));
+                    telephone = factory.createTelephone(
+                            Entrada.llegirString("Write the telephone number: "));
                 } catch (TelephoneFormatException e) {
                     System.out.println(e.getMessage());
                     telephone = null;
                 }
             } while (telephone == null);
             contactBook.setTelephone(name, telephone);
-        } catch (NonExistantCountryException e) {
+        } catch (CountryNotImplementedException e) {
+            System.out.printf("The trial version includes %s. Go to the appStore now and buy the full version!%n",
+                    Countries.getList());
+        } catch (TelephoneBookDuplicateKeyException e) {
             System.out.println(e.getMessage());
         }
     }

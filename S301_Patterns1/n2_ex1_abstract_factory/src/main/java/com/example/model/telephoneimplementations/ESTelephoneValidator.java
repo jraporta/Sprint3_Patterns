@@ -8,7 +8,7 @@ public class ESTelephoneValidator implements TelephoneValidator {
     private static final String REGEX = "^\\+34[6-9][0-9]{8}$";
 
     private static final String EXPLANATION =
-            "Spanish com.example.model.telephone should be +34 followed by a 9-digit number starting with 9,8, 7 or 6.";
+            "Spanish telephones should be +34 followed by a 9-digit number starting with 9,8, 7 or 6.";
 
     @Override
     public String getValidationRegex() {
