@@ -1,17 +1,16 @@
-package com.example;
+package com.example.model;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.example.address.Address;
-import com.example.telephone.Telephone;
+import com.example.model.addressimplementations.Address;
 
 public class ContactBook {
 	
 	private static ContactBook instance = null;
 	
-	private Map<String, Address> addressBook;
-	private Map<String, Telephone> telephoneBook;
+	private final Map<String, Address> addressBook;
+	private final Map<String, Telephone> telephoneBook;
 	
 	
 	private ContactBook() {
@@ -34,8 +33,8 @@ public class ContactBook {
 		return this.telephoneBook.get(name);
 	}
 
-	public void setAddress(String name, Address adress) {
-		this.addressBook.put(name, adress);
+	public void setAddress(String name, Address address) {
+		this.addressBook.put(name, address);
 	}
 
 	public void setTelephone(String name, Telephone telephone) {
@@ -44,10 +43,10 @@ public class ContactBook {
 
 	@Override
 	public String toString() {
-		return String.format("ContactBook containing %d addresses and %d telephones.",
+		return String.format("Your contact book contains %d addresses and %d telephones.",
 				this.addressBook.size(), this.telephoneBook.size());
 	}
-	
-	
+
+
 
 }

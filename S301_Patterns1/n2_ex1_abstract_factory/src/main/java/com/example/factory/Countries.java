@@ -1,4 +1,4 @@
-package com.example;
+package com.example.factory;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -6,11 +6,11 @@ import java.lang.reflect.InvocationTargetException;
 import com.example.exceptions.NonExistantCountryException;
 
 public enum Countries {
-	SPAIN("com.example.factory.ESFactory"),
-	USA("com.example.factory.USAFactory"),
-	UK("com.example.factory.UKFactory");
+	SPAIN("com.example.factory.implementation.ESFactory"),
+	USA("com.example.factory.implementation.USAFactory"),
+	UK("com.example.factory.implementation.UKFactory");
 	
-	private String factoryClass;
+	private final String factoryClass;
 	private AbstractFactory factory;
 
 	Countries(String s) throws RuntimeException {

@@ -1,38 +1,25 @@
-package com.example.address;
+package com.example.model.addressimplementations;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-public class USAAddress extends Address{
-	
-	enum field{
-		//natural number
-		NUMBER (true, "^\\d+$"),
-		STREET (true, null),
-		APARTMENT(false, null),
-		CITY (true, null),
-		//Two non-digit characters
-		STATE (true, "^\\D{2}$"),
-		//5-digit number optionally followed by a dash plus a 4-digit number
-		POSTAL_CODE (true, "^\\d{5}(-\\d{4})?$");
+import com.example.exceptions.AddressAlreadyInitializedException;
+import com.example.model.Address;
 
-		private boolean isMandatory;
-		private String regex;
-		
-		field(boolean b, String regex) {
-			this.isMandatory = b;
-			this.regex = regex;
-		}
-	}
+public class USAAddress implements Address{
 	
 	private static final String COUNTRY = "USA";
 	private LinkedHashMap<String, String> address;
-	
-	public USAAddress() {
-		this.address = super.askForAddress();
-	}
 
+	@Override
+	public Address initialize(LinkedHashMap<String, String> address) {
+		if (this.address != null){
+			throw new AddressAlreadyInitializedException();
+		}
+		this.address = address;
+		return this;
+	}
 
 	@Override
 	public String getField(String field) {
@@ -46,7 +33,7 @@ public class USAAddress extends Address{
 
 	
 	@Override
-	public List<String> getAddressFields() {
+	public List<String> getAddressValidator() {
 		List<String> addressFields = new ArrayList<>();
 		for (field f: field.values()) {
 			addressFields.add(f.name());

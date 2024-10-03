@@ -1,9 +1,12 @@
-package com.example;
+package com.example.factory;
 
-import com.example.address.Address;
+import com.example.model.addressimplementations.Address;
 import com.example.exceptions.NonExistantCountryException;
 import com.example.exceptions.TelephoneFormatException;
-import com.example.telephone.Telephone;
+import com.example.model.Telephone;
+import com.example.model.Address;
+
+import java.util.LinkedHashMap;
 
 public interface AbstractFactory {
 	
@@ -15,7 +18,7 @@ public interface AbstractFactory {
 		}
 	}
 
-	public Address createAddress();
+	public Address createAddress(LinkedHashMap<String, String> address);
 	
 	public Telephone createTelephone(String telephone) throws TelephoneFormatException;
 	
