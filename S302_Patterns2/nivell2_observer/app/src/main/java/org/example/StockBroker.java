@@ -3,7 +3,7 @@ package org.example;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class StockBroker {
+public class StockBroker implements Observable{
 
     private class Stock{
         String name;
@@ -47,14 +47,17 @@ public class StockBroker {
         this.stocks.add(new Stock("Amazon", 172.58));
     }
 
+    @Override
     public void addObserver(Observer observer){
         this.observers.add(observer);
     }
 
+    @Override
     public void removeObserver(Observer observer){
         this.observers.remove(observer);
     }
 
+    @Override
     public void notifyObservers(String notification){
         observers.forEach(x -> {x.update(notification);});
     }
